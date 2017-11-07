@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vh,vw</title>
+	<style type="text/css" media="screen">
+	*{
+		padding:0;
+		margin:0;
+	}		
+	.box{
+		width:100px;
+		height:100px;
+		margin-top: calc(50vh - 50px);
+		margin-left:calc(50vw - 50px);
+		background:pink;
+	}
+	.column-1{
+		float: left;
+		width: 100vw;
+	}
+	.column-2{
+		float: left;
+		width: calc(100vw / 2);
+	}	
+	.column-3{
+		float: left;
+		width: calc(100vw / 3);
+	}
+	body>div{
+		overflow: hidden;
+	}
+	div>div{
+		height: 35px;
+		outline: 1px solid #dedede;
+	}
+	.box-1 div{
+		background: red;
+	}
+	.box-2 div{
+		background: orange;
+	}	
+	.box-3 div{
+		background: pink;
+	}			
+	</style>
+	
+</head>
+<body>
+	<div class="box">123</div>
+	<div class="box-1">
+		<div class="column-1"></div>
+	</div>
+	<div class="box-2">
+		<div class="column-2"></div>
+		<div class="column-2"></div>
+	</div>
+	<div class="box-3">
+		<div class="column-3"></div>
+		<div class="column-3"></div>
+		<div class="column-3"></div>				
+	</div>
+</body>
+</html>
