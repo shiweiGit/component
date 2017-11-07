@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+#getCode {
+    width: 9rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.2rem;
+    background-color: #3a3a3a;
+    color: #fff;
+    border-radius: 0.8rem;
+    border: none;
+    text-align: center;
+}
+
+#getCode[disabled] {
+    background-color: #B6B6B6;
+}
+</style>
+
+<body>
+    <button id="getCode">获取验证码</button>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(function() {
+    //获取验证码
+    var getCode = document.getElementById('getCode');
+    var wait = 60;
+
+    function time(btn) {
+        if (wait === 0) {
+            btn.removeAttribute("disabled");
+            btn.innerHTML = "获取验证码";
+            wait = 60;
+        } else {
+            btn.setAttribute("disabled", true);
+            btn.innerHTML = wait + "秒后重试";
+            wait--;
+            setTimeout(function() {
+                time(btn);
+            }, 1000);
+        }
+    }
+    getCode.onclick = function() {
+        time(this);
+    };
+})
+</script>
+
+</html>
