@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航菜单列表</title>
+
+    <style>
+        /*公共样式*/
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-family: 'Hiragino Sans GB', 'Microsoft Yahei', "WenQuanYi Micro Hei", SimSun, Tahoma, Arial, Helvetica, STHeiti;
+            color: #333333;
+            box-sizing: border-box;
+        }
+        a,a:hover{
+            text-decoration: none;
+        }
+        ul,li,ol{
+            list-style: none;
+        }
+        .clearfix{
+            zoom: 1;
+        }
+        .clearfix:after{
+            content: " ";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+        /*导航列表样式*/
+        .borNone{
+            border:none !important;
+        }
+        nav{
+            width: 228px;
+            margin: 20px 0 0 340px ;
+        }
+        .navBtn{
+            cursor: pointer;
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            background: #0169C6 url("images/top8.png") 200px center/16px no-repeat;
+            color: #ffffff;
+            font-size: 14px;
+            padding-left: 10px;
+        }
+        .navList{
+            border: 2px solid #0169C6;
+            position: relative;
+            width: 228px;
+        }
+        .navList  dd{
+            padding: 0 16px;
+            background:url("images/top10.png") 196px  center /20px no-repeat;
+        }
+        .navList  dd:hover{
+            background:#749dcf url("images/top10a.png") 196px  center /20px no-repeat;
+        }
+        .navList  dd a{
+            display: block;
+            height: 42px;
+            line-height: 42px;
+            border-bottom: 1px dashed #CCCCCC;
+            padding-left: 42px;
+            font-size: 14px;
+            background:url("images/gray-icon1.png") left center/24px no-repeat;
+            position: relative;/*此句为了定位小三角，实现鼠标附在列表上列表右边小三角跟随效果*/
+        }
+        .navList dd a:hover{
+            color: #ffffff;
+            background: url("images/white-icon1.png") left center/24px no-repeat;
+        }
+        .navList dd:hover a:before{
+            border-left: 8px solid #749dcf;
+            border-top:6px solid transparent;
+            border-bottom: 6px solid transparent;
+            content: '';
+            display: block;
+            position: absolute;
+            right: -24px;
+            top:14px;
+            z-index:5;
+        }
+        .navList dd:hover a:after{
+            border-left: 12px solid #0169C6;
+            border-top:10px solid transparent;
+            border-bottom: 10px solid transparent;
+            content: '';
+            display: block;
+            position: absolute;
+            right: -28px;
+            top:10px;
+            z-index: 4;
+        }
+        .navList dd:nth-child(2) a {
+            background-image:url("images/gray-icon2.png") ;
+        }
+        .navList dd:nth-child(3) a {
+            background-image:url("images/gray-icon3.png") ;
+        }
+        .navList dd:nth-child(4) a {
+            background-image:url("images/gray-icon4.png") ;
+        }
+        .navList dd:nth-child(5) a {
+            background-image:url("images/gray-icon5.png") ;
+        }
+        .navList dd:nth-child(6) a {
+            background-image:url("images/gray-icon6.png") ;
+        }
+        .navList dd:nth-child(7) a {
+            background-image:url("images/gray-icon7.png") ;
+        }
+        .navList dd:nth-child(8) a {
+            background-image:url("images/gray-icon8.png") ;
+        }
+        .navList dd:nth-child(9) a {
+            background-image:url("images/gray-icon9.png") ;
+        }
+        .navList dd:nth-child(10) a {
+            background-image:url("images/gray-icon10.png") ;
+        }
+        .navList dd:nth-child(11) a {
+            background-image:url("images/gray-icon11.png") ;
+        }
+        .navList dd:nth-child(12) a {
+            background-image:url("images/gray-icon12.png") ;
+        }
+        .navList dd:nth-child(13) a {
+            background-image:url("images/gray-icon13.png") ;
+        }
+
+        .navList dd:nth-child(2) a:hover {
+            background-image:url("images/white-icon2.png") ;
+        }
+        .navList dd:nth-child(3) a:hover {
+            background-image:url("images/white-icon3.png") ;
+        }
+        .navList dd:nth-child(4) a:hover {
+            background-image:url("images/white-icon4.png") ;
+        }
+        .navList dd:nth-child(5) a:hover {
+            background-image:url("images/white-icon5.png") ;
+        }
+        .navList dd:nth-child(6) a:hover {
+            background-image:url("images/white-icon6.png") ;
+        }
+        .navList dd:nth-child(7) a:hover {
+            background-image:url("images/white-icon7.png") ;
+        }
+        .navList dd:nth-child(8) a:hover {
+            background-image:url("images/white-icon8.png") ;
+        }
+        .navList dd:nth-child(9) a:hover {
+            background-image:url("images/white-icon9.png") ;
+        }
+        .navList dd:nth-child(10) a:hover {
+            background-image:url("images/white-icon10.png") ;
+        }
+        .navList dd:nth-child(11) a:hover {
+            background-image:url("images/white-icon11.png") ;
+        }
+        .navList dd:nth-child(12) a:hover {
+            background-image:url("images/white-icon12.png") ;
+        }
+        .navList dd:nth-child(13) a:hover {
+            background-image:url("images/white-icon13.png") ;
+        }
+        /*此句代码也可控制，鼠标放上去显示右侧隐藏的box*/
+        .navList  dd:hover .navListRight{
+            display: block;
+        }
+        .navListRight{
+            background: #ffffff;
+            display: none;
+            position: absolute;
+            left: 224px;
+            top:-2px;
+            width: 500px;
+            min-height: 550px;
+            border: 2px solid #0169C6;
+            padding: 10px 20px;
+        }
+        .navListRight a {
+            float: left;
+            width: 200px;
+            height: 28px !important;
+            line-height: 28px !important;
+            padding: 0 10px;
+            border-bottom: none !important;
+            background:url("images/top10.png") 10px center/12px 12px no-repeat !important;
+        }
+        .navListRight a:hover {
+            color: #333333 !important;
+            background:#E8F4FF url("images/top10.png") 10px center/12px 12px no-repeat !important;
+        }
+        .navListRight a:before,
+        .navListRight a:after{
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h4 class="navBtn" id="navBtn">商品分类</h4>
+        <dl style="display: none" class="navList">
+            <dd>
+                <a href="">一级1</a>
+                <div class="navListRight">
+                    <a href="#">二级1</a>
+                    <a href="#">二级1</a>
+                    <a href="#">二级1</a>
+                    <a href="#">二级1</a>
+                    <a href="#">二级1</a>
+                </div>
+            </dd>
+            <dd>
+                <a href="">一级2</a>
+                <div class="navListRight">
+                    <a href="#">二级2</a>
+                    <a href="#">二级2</a>
+                    <a href="#">二级2</a>
+                    <a href="#">二级2</a>
+                    <a href="#">二级2</a>
+                </div>
+            </dd>
+            <dd>
+                <a href="">一级3</a>
+                <div class="navListRight">
+                    <a href="#">二级3</a>
+                    <a href="#">二级3</a>
+                    <a href="#">二级3</a>
+                    <a href="#">二级3</a>
+                    <a href="#">二级3</a>
+                </div>
+            </dd>
+            <dd>
+                <a href="">一级4</a>
+                <div class="navListRight">
+                    <a href="#">二级4</a>
+                    <a href="#">二级4</a>
+                    <a href="#">二级4</a>
+                    <a href="#">二级4</a>
+                    <a href="#">二级4</a>
+                </div>
+            </dd>
+            <dd><a href="">一级5</a></dd>
+            <dd><a href="">一级6</a></dd>
+            <dd><a href="">一级7</a></dd>
+            <dd><a href="">一级8</a></dd>
+            <dd><a href="">一级9</a></dd>
+            <dd><a href="">一级10</a></dd>
+            <dd><a href="">一级11</a></dd>
+            <dd><a href="">一级12</a></dd>
+            <dd><a href="" class="borNone">一级13</a></dd>
+        </dl>
+</nav>
+<script src="http://code.jquery.com/jquery-1.4.1.js"></script>
+<script>
+    $(function () {
+        $("#navBtn").click(function () {
+            $(".navList").slideToggle();
+        });
+    });
+//    鼠标放上去显示右侧列表，此jquery也可以实现
+    /*$(function () {
+        $("nav dd").hover(function () {
+            $(".navListRight",this).show();
+        });
+        $("nav dd").mouseleave(function () {
+            $(".navListRight",this).hide();
+        });
+    });*/
+</script>
+</body>
+</html>

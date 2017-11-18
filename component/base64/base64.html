@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			text-align: center;
+			font-family: 'MicroSoft YaHei';
+		}
+		#img-show{
+			display: inline-block;
+			margin: 50px;
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			overflow: hidden;
+			vertical-align: top;
+			font-size: 0;
+		}
+		#img-show:after{
+			display: inline-block;
+			content: '';
+			width: 0;
+			height: 200px;
+			vertical-align: middle;
+		}
+		#img-show img{
+			max-width: 200px;
+			max-height: 200px;
+			vertical-align: middle;
+		}
+		#img-show em{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			line-height: 85px;
+			font-size: 80px;
+			font-style: normal;
+			vertical-align: middle;
+			color: #ddd;
+			user-select: none;
+		}
+		#img-show.active{
+			box-shadow: 0 0 15px #ea6229;
+			border-color: transparent;
+		}
+
+		#base64-wrap{
+			margin: 0 auto;
+			width: 700px;
+			min-height: 150px;
+			border: 1px solid #ccc;
+		}
+		#base64-wrap p{
+			padding: 10px;
+			word-break: break-all;
+			text-align: left;
+		}
+		label{
+			display: inline-block;
+			margin-bottom: 30px;
+			width: 100px;
+			height: 40px;
+			background: #ea6229;
+			border-radius: 20px;
+			color: #eee;
+			text-align: center;
+			line-height: 40px;
+			cursor: pointer;
+			user-select: none;
+			transition: .3s;
+		}
+		label:active{
+			opacity: .8;
+			transform: scale(.95);
+		}
+	</style>
+</head>
+<body>
+	<div id="img-show" class="">
+		<em>+</em>
+	</div>
+	<div>
+		<label for="inp">
+			选择图片
+		</label>
+		<input type="file" id="inp" accept="image/*" style="display: none;">
+	</div>
+
+	<div id="base64-wrap">
+		<p></p>
+	</div>
+
+	<script>
+		var obj = document.querySelector('#img-show');
+		var base = document.querySelector('#base64-wrap p');
+		var inp = document.querySelector('#inp');
+
+		obj.ondrop = function(e){
+			e.preventDefault();
+			var file = e.dataTransfer.files[0];
+			read(file);
+			obj.classList.remove('active');
+		}
+		obj.ondragover = function(e){
+			e.preventDefault();
+			obj.classList.add('active');
+		}
+		obj.ondragleave = function(){
+			obj.classList.remove('active');
+		}
+		inp.onchange = function(){
+			var file = this.files[0];
+			read(file);
+		}
+
+		function read(file){
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function(){
+				var img = new Image();
+				img.src = this.result;
+				obj.innerHTML = '';
+				obj.appendChild(img);
+				base.innerHTML = this.result;
+
+				var selection = window.getSelection();
+		        var range = document.createRange();
+		        range.selectNodeContents(base);
+		        selection.removeAllRanges();
+		        selection.addRange(range);
+		        base.focus();
+			}
+		}
+
+	</script>
+</body>
+</html>
